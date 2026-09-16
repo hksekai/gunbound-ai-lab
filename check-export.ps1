@@ -7,7 +7,7 @@ $root = $PSScriptRoot
 function Forbidden-ExportPath([string]$Path) {
     $path = $Path.Replace('\','/')
     $path -match '(^|/)(private|runtime|session|logs|client-image|assets|downloads|node_modules|\.copilot|\.vs)/' -or
-        $path -match '(?i)\.(exe|dll|sys|gme|xfs|iso|vdi|vmdk|vhdx?|vbox(?:-prev)?|ova|ovf|zip|7z|rar|msi|cab|pdb|obj|bin|log|jsonl|pfx|p12|pem|key|lnk)$' -or
+        $path -match '(?i)\.(exe|dll|sys|gme|xfs|iso|vdi|vmdk|vhdx?|vbox(?:-prev)?|ova|ovf|zip|7z|rar|msi|cab|pdb|obj|bin|log|jsonl|pid|stop|stage|lock|pfx|p12|pem|key|lnk)$' -or
         $path -match '(^|/)\.env(?:\.|$)' -or
         $path -match '^backend/(native/|schema-static\.sql$|manifest\.json$|loopback-patches\.json$|status\.json$|.*-processes\.json$|.*\.pid$)' -or
         $path -match '^client-build/(human/|bot/|work/|startup/|manifest\.json$|verification\.json$|backend-allowance\.json$)' -or
@@ -35,7 +35,8 @@ function Find-ExportTextIssues([string]$Text) {
 
 if ($Check) {
     foreach ($path in @('private/accounts.json','runtime/vm/system.vdi','vm/config.json',
-        'backend/schema-static.sql','client-image/GunBound.gme','logs/test.jsonl','image.iso','.env.local')) {
+        'backend/schema-static.sql','client-image/GunBound.gme','logs/test.jsonl','image.iso','.env.local',
+        'backend/bootstrap.lock','backend/database.stop','backend/core-processes.json.example.stage')) {
         if (!(Forbidden-ExportPath $path)) { throw 'A private/runtime artifact escaped the export path check.' }
     }
     foreach ($path in @('bot.cs','aim.cs','setup.ps1','backend/login-date-compat.sql',

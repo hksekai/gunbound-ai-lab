@@ -74,6 +74,10 @@ id_ed25519*
 # Local diagnostics and editor/tool state.
 *.log
 *.jsonl
+*.pid
+*.stop
+*.stage
+*.lock
 *.tmp
 *.new
 *.bak
