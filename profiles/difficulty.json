@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "assignments": {
+    "BotOne": "hard",
+    "BotTwo": "hard",
+    "BotThree": "hard"
+  },
+  "calibration": "Difficulty values are explicit starting parameters, not measured skill ratings. Native turn, roster, position and terrain observations remain exact at every tier. This file selects skills; accounts are provisioned separately.",
+  "behaviorContract": "Armor S1 is used for current combat and excavation. Automatic S2 is disabled: the user deferred build-specific runtime calibration. Its eventual policy remains DIRECT shots with at least 80% model robustness and a validated native continuation/per-impact safety model; never excavation or SS. Model percentages are nine bounded angle/power stress-test results, NOT calibrated real-world hit probabilities: +/-1 native degree censored at native limits, +/-max(4, observed charge error + 2) power units. Aim at the native body-envelope center; terrain collision takes priority over body intersection, neither is guaranteed damage. Compare living enemies and supported 12/24/36/48px positions in one 1600ms tactical budget; movement energy is not assumed to equal pixels. Two-hop supported goals and at most four observed-shot memories last only within the match. Sample input-side angle/power and target-estimation noise once per native turn; reduce it to 20% before integer quantization for an observed, scene-matching, re-simulated shot. Never perturb authoritative ownership, turn, life, positions, wind or movement safety data. Delays are milliseconds.",
+  "showModelConfidence": true,
+  "armorShot2": {
+    "status": "deferred",
+    "minimumModelConfidencePercent": 80,
+    "model": null,
+    "evidence": null,
+    "selectionKey": null,
+    "nativeSelectionVerified": false,
+    "projectiles": null,
+    "maximumWindPower": null,
+    "allowedFacings": null,
+    "maximumAbsoluteSlopeDegrees": null,
+    "minimumGunAngle": null,
+    "maximumGunAngle": null,
+    "minimumPower": null,
+    "maximumPower": null,
+    "minimumDistancePixels": null,
+    "maximumDistancePixels": null
+  },
+  "shot2CalibrationContract": "The user chose runtime calibration later. This build hard-disables automatic S2; JSON cannot enable it. status accepts deferred (current) or pending, the eventual minimumModelConfidencePercent stays 80, nativeSelectionVerified stays false, and every reserved model/evidence/selection/projectile/envelope field stays null. A claimed verified status or supplied parameters are rejected, not treated as calibration. Exact-client static findings identify S2 as ODoubleBullet with first/second-impact state at +0x344 and collision reset/continuation after its first impact, unlike S1's OBullet. Native launch muzzle fields differ: S1 uses decoded +0x1C0/+0x1C8, S2 +0x1D0/+0x1D8; both launch paths pass decoded +0x1A8 angle and +0x254 power. S2 native legal angle limits must be reacquired after weapon selection. These findings rule out the old independent single-impact Euler envelope for this build; they do NOT establish runtime trajectory, safe blast radii, damage, or complete continuation semantics. Future activation requires an explicitly bounded, implemented and build/runtime-validated continuation/per-impact safety model with the actual S2 launch telemetry. Never substitute S1 muzzle/blast physics, infer a split model, or add an SS-style airtime threshold. Eventual S2 policy remains >=80% MODEL-estimate DIRECT shots only with safety checked for all impacts; S1 remains the digging weapon. Parent tracks deferred calibration separately.",
+  "nativeEquipment": {
+    "storage": "Chest",
+    "accountGender": 0,
+    "accountGenderName": "male",
+    "encoding": "Item = typeBits | localId. Body=0x08000, head=0x18000, glasses=0x28000 for male items; shared flags=0x38000. localId occupies bits 0..14. Female body/head/glasses have bit 15 clear. Type 0x30000 is a bundle, not a female flag.",
+    "ownership": "Chest.Owner is the individual bot identity (BotOne, BotTwo or BotThree), Wearing=1, Acquisition='T', Expire=NULL, Volume=1, PlaceOrder=0, Recovered=0, ExpireType='I'. Chest.No is an auto-generated inventory serial, never an item ID.",
+    "legacyGameFields": "Preserve AvatarWear, Prop1 and Prop2 byte-for-byte. The supplied Serv3 equipment/login SQL does not use them; no Serv2 packed-hex encoding is assumed.",
+    "statsAffectPlay": "These are not stat-free cosmetics. Combat effects depend on the native Avatar-on/game options; reward effects and effective match strength have not been calibrated.",
+    "statUnits": "Raw sums from the shipped native avatar catalog, not percentages or measured difficulty. Native Golden Helmet delay is -3; the later MenuDat row instead says +3."
+  },
+  "sources": {
+    "originalCoreSha256": "d82513950d4db08be664d538e09e5b00a07c795d76a0a7ed0eede8a8553fa511",
+    "labCoreSha256": "00dae3201695a5e543801305c0c2b74052ef61adc921e978db817302164f50e7",
+    "nativeAvatarCatalogSha256": "6725a56ef91c7d5288928fa8d74b971c2c17642f325ac70dd6d7dceb4394e11b"
+  },
+  "tiers": {
+    "easy": {
+      "behavior": {
+        "mobile": "Armor",
+        "shot": 1,
+        "thinkDelayMs": 1800,
+        "aimErrorDegrees": 2.5,
+        "powerErrorUnits": 6,
+        "maxAngleAdjustmentMs": 2500,
+        "targetEstimateErrorPixels": 20,
+        "angleStepDegrees": 6,
+        "maxMovePixels": 12
+      },
+      "gear": {
+        "name": "Trail Scout",
+        "nativeStatTotals": { "delay": 0, "bunge": 6, "attack": 0, "defense": 0, "health": 0, "itemDelay": 9, "shield": 0, "popularity": 27 },
+        "items": [
+          { "slot": "head", "name": "Cowboy Hat", "itemId": 98317, "catalogType": "mh", "localId": 13, "gender": "male" },
+          { "slot": "body", "name": "Cowboy", "itemId": 32780, "catalogType": "mb", "localId": 12, "gender": "male" },
+          { "slot": "glasses", "name": "Battle Goggle", "itemId": 163841, "catalogType": "mg", "localId": 1, "gender": "male" },
+          { "slot": "flag", "name": "Blue Flag", "itemId": 229377, "catalogType": "mf", "localId": 1, "gender": "shared" }
+        ]
+      }
+    },
+    "medium": {
+      "behavior": {
+        "mobile": "Armor",
+        "shot": 1,
+        "thinkDelayMs": 1300,
+        "aimErrorDegrees": 1.0,
+        "powerErrorUnits": 4,
+        "maxAngleAdjustmentMs": 3500,
+        "targetEstimateErrorPixels": 8,
+        "angleStepDegrees": 3,
+        "maxMovePixels": 24
+      },
+      "gear": {
+        "name": "Black Flag Captain",
+        "nativeStatTotals": { "delay": 0, "bunge": 0, "attack": 21, "defense": 0, "health": 0, "itemDelay": 3, "shield": 0, "popularity": 21 },
+        "items": [
+          { "slot": "head", "name": "Pirate Hat", "itemId": 98311, "catalogType": "mh", "localId": 7, "gender": "male" },
+          { "slot": "body", "name": "Pirate Captain", "itemId": 32772, "catalogType": "mb", "localId": 4, "gender": "male" },
+          { "slot": "glasses", "name": "Cross Scar", "itemId": 163843, "catalogType": "mg", "localId": 3, "gender": "male" },
+          { "slot": "flag", "name": "Black Flag", "itemId": 229380, "catalogType": "mf", "localId": 4, "gender": "shared" }
+        ]
+      }
+    },
+    "hard": {
+      "behavior": {
+        "mobile": "Armor",
+        "shot": 1,
+        "thinkDelayMs": 900,
+        "aimErrorDegrees": 1.0,
+        "powerErrorUnits": 3,
+        "maxAngleAdjustmentMs": 4500,
+        "targetEstimateErrorPixels": 0,
+        "angleStepDegrees": 1,
+        "maxMovePixels": 48
+      },
+      "gear": {
+        "name": "Golden Sentinel",
+        "nativeStatTotals": { "delay": -3, "bunge": 0, "attack": 6, "defense": 48, "health": 0, "itemDelay": 0, "shield": 0, "popularity": 18 },
+        "items": [
+          { "slot": "head", "name": "Golden Helmet", "itemId": 98345, "catalogType": "mh", "localId": 41, "gender": "male" },
+          { "slot": "body", "name": "Golden Armour", "itemId": 32807, "catalogType": "mb", "localId": 39, "gender": "male" },
+          { "slot": "glasses", "name": "Zoro Mask", "itemId": 163847, "catalogType": "mg", "localId": 7, "gender": "male" },
+          { "slot": "flag", "name": "Yellow Flag", "itemId": 229381, "catalogType": "mf", "localId": 5, "gender": "shared" }
+        ]
+      }
+    }
+  }
+}
